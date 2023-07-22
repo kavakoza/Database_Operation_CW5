@@ -9,9 +9,7 @@ class JOB(ABC):
 
 
 class HH(JOB):
-    """
-    Класс для работы с платформой HeadHunter
-    """
+
 
     def get_vacancies(self, employer_id: int) -> list:
         params = {
