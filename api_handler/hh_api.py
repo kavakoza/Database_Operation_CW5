@@ -1,14 +1,7 @@
-from abc import ABC, abstractmethod
 import requests
 
 
-class JOB(ABC):
-    @abstractmethod
-    def get_request(self, employer_id):
-        pass
-
-
-class HH(JOB):
+class HH:
 
 
     def get_vacancies(self, employer_id: int) -> list:

@@ -4,8 +4,9 @@ from db_handler.config import config
 
 
 class DBManager:
+
     params = config()
-    connection = psycopg2.connect(db_name="hh_vacancies", **params)
+    connection = psycopg2.connect(dbname="hh_vacancies", **params)
 
     def cursor_execute(self, query: str) -> list:
         with self.connection.cursor() as cursor:

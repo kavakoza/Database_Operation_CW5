@@ -1,24 +1,20 @@
 import psycopg2
 
-from api_handler.constants import db_dict
 from api_handler.hh_api import HH
 from db_handler.config import config
 
 hh = HH
+params = config()
+
 
 def create_tables():
-    conn = psycopg2.connect(
-        host=db_dict()["host"],
-        database="hh_vacancies",
-        user=db_dict()["postgres"],
-        password=db_dict()["1234"],
-    )
 
+    conn = psycopg2.connect(dbname="hh_vacancies", **params)
     conn.autocommit = True
 
     with conn.cursor() as cur:
-        cur.execute(f"DROP DATABASE hh_db")
-        cur.execute(f"CREATE DATABASE hh_db")
+        cur.execute(f"DROP DATABASE hh_vacancies")
+        cur.execute(f"CREATE DATABASE hh_vacancies")
 
     cur.close()
     conn.close()
