@@ -3,7 +3,7 @@ import psycopg2
 from api_handler.hh_api import HH
 from db_handler.config import config
 
-hh = HH
+hh = HH()
 params = config()
 
 
@@ -13,7 +13,7 @@ def create_tables():
     conn.autocommit = True
 
     with conn.cursor() as cur:
-        cur.execute(f"DROP DATABASE hh_vacancies")
+        cur.execute(f"DROP DATABASE IF EXISTS hh_vacancies")
         cur.execute(f"CREATE DATABASE hh_vacancies")
 
     cur.close()
