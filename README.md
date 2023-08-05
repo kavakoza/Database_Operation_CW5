@@ -6,7 +6,6 @@ Getting data about 10 specific companies and their vacancies from hh.ru with API
 
 ### How does the project work:
 1. Before starting you have to set up configuration in a file database.ini
-2. Open db_handler directory and run create_db.py
 2. Run app.py 
 
 

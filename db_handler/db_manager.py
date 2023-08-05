@@ -20,7 +20,7 @@ class DBManager:
 
     def get_companies_and_vacancies(self):
         query = """
-            SELECT name, open_vacancies
+            SELECT title, open_vacancies
             FROM employers
         """
 
@@ -29,8 +29,9 @@ class DBManager:
 
     def get_all_vacancies(self):
         query = """
-                    SELECT open_vacancies
-                    FROM employers
+                    SELECT e.title as company, v.title as vacancy_name, v.payment as salary_from, v.url as alternate_url
+                    FROM vacancies v
+                    INNER JOIN employers e ON e.employer_id = v.employer_id                    
                 """
 
         return self.cursor_execute(query=query)
@@ -38,11 +39,11 @@ class DBManager:
 
     def get_average_salary(self):
         query = """
-                    SELECT ROUND(AVG(salary_from), ROUND(AVG(salary_to))
+                    SELECT ROUND(AVG(salary_from))
                     FROM vacancies
                 """
 
-        return self.cursor_execute(query=query)
+        return self.cursor_execute(query=query)[0][0]
 
 
     def get_vacancies_with_higher_salary(self):
@@ -59,7 +60,7 @@ class DBManager:
         query = f"""
                     SELECT *
                     FROM vacancies
-                    WHERE title LIKE "%{keyword}%" OR description LIKE "%{keyword}%"
+                    WHERE title ILIKE '%{keyword}%' OR description ILIKE '%{keyword}%'
                 """
 
         return self.cursor_execute(query=query)

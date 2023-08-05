@@ -3,7 +3,6 @@ import requests
 
 class HH:
 
-
     def get_vacancies(self, employer_id: int) -> list:
         params = {
             "per_page": 100,
@@ -19,12 +18,13 @@ class HH:
             hh_dict = {
                 "id": int(item["id"]),
                 "title": item["name"],
-                "payment": item["salary"]["from"] if item["salary"] else None,
-                "description": item["snippet"]["responsobility"],
+                "salary_from": item["salary"]["from"] if item["salary"] else None,
+                "salary_to": item["salary"]["to"] if item["salary"] else None,
+                "description": item["snippet"]["responsibility"],
                 "url": item['alternate_url'],
                 "employer_id": employer_id,
             }
-            if hh_dict["payment"] is not None:
+            if hh_dict["salary_from"] is not None:
                 hh_list.append(hh_dict)
 
         return hh_list
@@ -37,7 +37,7 @@ class HH:
             "employer_id": int(employer_id),
             "title": data["name"],
             "area": data["area"]["name"],
-            "vacancies": data["open_vacancies"],
+            "open_vacancies": data["open_vacancies"],
             "url": data['alternate_url'],
         }
         return hh_company
