@@ -14,7 +14,6 @@ def create_database():
     conn.autocommit = True
 
     cur = conn.cursor()
-    # cur.execute("DROP DATABASE IF EXISTS hh_vacancies;")
     try:
         cur.execute("CREATE DATABASE hh_vacancies;")
     except DuplicateDatabase:
@@ -24,7 +23,7 @@ def create_database():
 
 
 def create_tables():
-    # conn.close()
+
     with psycopg2.connect(**params) as conn:
         with conn.cursor() as cur:
             cur.execute("DROP TABLE IF EXISTS employers CASCADE;")

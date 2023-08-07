@@ -29,7 +29,7 @@ class DBManager:
 
     def get_all_vacancies(self):
         query = """
-                    SELECT e.title as company, v.title as vacancy_name, v.payment as salary_from, v.url as alternate_url
+                    SELECT e.title as company, v.title as vacancy_name, v.salary_from as salary_from, v.url as alternate_url
                     FROM vacancies v
                     INNER JOIN employers e ON e.employer_id = v.employer_id                    
                 """
